@@ -1,12 +1,16 @@
 import { useState } from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Home from './Pages/Home';
 import Ajouter from './Pages/Ajouter'
 import Navbar from './Shared/navbar'
+import { useNavigate } from "react-router-dom";
 
 function App() {
+
+  const navigate = useNavigate();
 
   const columns = ["Matricule", "Nom", "Prénom", "Filiére", "Delete"];
 
@@ -21,6 +25,7 @@ function App() {
 
   const deleteStagiaire = (matricule) => update_row(stagiaires.filter((stagiaire) => stagiaire.matricule !== matricule))
 
+  const notify = () => toast.success("Stagiaire ajouté avec succée")
 
   const add_stagiaire = () => 
   {
@@ -30,13 +35,14 @@ function App() {
       new_stagiaire.prenom === '' ||
       new_stagiaire.filiere === ''
     ){
-      alert('Invalid Information')
+      toast.warning("Invalide information")
       return
     }
-
+    
     update_row([...stagiaires, new_stagiaire])
     set_stagiaire({matricule:'', nom: '', prenom: '', filiere: ''})
-
+    notify()
+    navigate("/");
   }
 
 
@@ -48,6 +54,18 @@ function App() {
           <Route path="/" element={<Home stagiaires={stagiaires} columns={columns} deleteStagiaire={deleteStagiaire}/>} />
           <Route path="/ajouter" element={<Ajouter  add_stagiaire={ add_stagiaire} new_stagiaire={new_stagiaire} set_stagiaire={set_stagiaire}/>} />
         </Routes>
+
+        <ToastContainer
+          autoClose={1000}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
     </>
 
   );
