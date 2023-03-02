@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Table from './Shared/Table';
-import { Input, Button } from "@nextui-org/react";
+import { Input, Button, Text } from "@nextui-org/react";
 import './App.css';
 
 function App() {
@@ -47,14 +47,18 @@ function App() {
 
       {
         ["matricule", "nom", "prenom", "filiere"].map((ele, index) => (
-          <Input
+          <label>
+            <Text b size={14} css={{ tt: "capitalize", margin:'0 5px' }}>{ele}</Text>
+            
+            <Input
             value={new_stagiaire[ele]}
             onChange={(event) => set_stagiaire({...new_stagiaire, ...{[ele]: event.target.value} })} 
             clearable bordered fullWidth color="primary" key={index} size="md" placeholder={capitalize(ele)} />
+          </label>
         ))
       }
       
-      <span><Button onPress={add_stagiaire} flat color="primary" auto>Ajouter Stagiaire</Button></span>
+      <span><Button css={{margin:'10px 0'}} onPress={add_stagiaire} flat color="primary" auto>Ajouter Stagiaire</Button></span>
     </div>
 
     </>
