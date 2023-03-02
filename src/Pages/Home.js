@@ -28,7 +28,7 @@ export default function Template({stagiaires, columns, deleteStagiaire})
             <Table.Cell><Text b size={14} css={{ tt: "capitalize" }}>{stagiaire.filiere}</Text></Table.Cell>
             <Table.Cell>
                 <Tooltip
-                    content="Delete Stagiaire"
+                    content="Supprimer"
                     color="error"
                     onClick={() => deleteStagiaire(stagiaire.matricule)}
                 >
