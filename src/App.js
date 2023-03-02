@@ -1,7 +1,10 @@
 import { useState } from 'react';
-import Table from './Shared/Table';
-import { Input, Button, Text } from "@nextui-org/react";
 import './App.css';
+import { Routes, Route } from 'react-router-dom';
+
+import Home from './Pages/Home';
+import Ajouter from './Pages/Ajouter'
+import Navbar from './Shared/navbar'
 
 function App() {
 
@@ -18,8 +21,6 @@ function App() {
 
   const deleteStagiaire = (matricule) => update_row(stagiaires.filter((stagiaire) => stagiaire.matricule !== matricule))
 
-  console.log(new_stagiaire)
-  const capitalize = (s) => s[0].toUpperCase() + s.slice(1);
 
   const add_stagiaire = () => 
   {
@@ -38,33 +39,22 @@ function App() {
 
   }
 
+
   return (
     <>
-    <Table stagiaires={stagiaires} columns={columns} deleteStagiaire={deleteStagiaire}/>
-
-
-    <div style={{width:'400px', display:'grid', margin:'50px auto', flexDirection:'column', gap:'10px'}}>
-
-      {
-        ["matricule", "nom", "prenom", "filiere"].map((ele, index) => (
-          <label>
-            <Text b size={15} color="primary" css={{ tt: "capitalize", margin:'0 5px' }}>{ele}</Text>
-            
-            <Input
-            value={new_stagiaire[ele]}
-            onChange={(event) => set_stagiaire({...new_stagiaire, ...{[ele]: event.target.value} })} 
-            clearable bordered fullWidth color="primary" key={index} size="md" placeholder={capitalize(ele)} />
-          </label>
-        ))
-      }
+      <Navbar />
       
-      <span><Button css={{margin:'10px 0'}} onPress={add_stagiaire} flat color="primary" auto>Ajouter Stagiaire</Button></span>
-    </div>
-
+        <Routes>
+          <Route path="/" element={<Home stagiaires={stagiaires} columns={columns} deleteStagiaire={deleteStagiaire}/>} />
+          <Route path="/ajouter" element={<Ajouter  add_stagiaire={ add_stagiaire} new_stagiaire={new_stagiaire} set_stagiaire={set_stagiaire}/>} />
+        </Routes>
     </>
 
-    
   );
 }
 
 export default App;
+
+
+
+

@@ -1,6 +1,6 @@
 import { Table, Tooltip, Text } from "@nextui-org/react";
 
-import IconButton from "./Button";
+import IconButton from "../Shared/Button";
 import DeleteIcon from "../svg/delete";
 
 
