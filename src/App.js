@@ -48,7 +48,7 @@ function App() {
       {
         ["matricule", "nom", "prenom", "filiere"].map((ele, index) => (
           <label>
-            <Text b size={14} css={{ tt: "capitalize", margin:'0 5px' }}>{ele}</Text>
+            <Text b size={15} color="primary" css={{ tt: "capitalize", margin:'0 5px' }}>{ele}</Text>
             
             <Input
             value={new_stagiaire[ele]}
